@@ -36,6 +36,7 @@
   "build": {
     "appId": "com.eastprimewhin.app",
     "productName": "East Prime Whin",
+    "artifactName": "${productName}-Setup-${version}.${ext}",
     "publish": [
       {
         "provider": "github",
