@@ -1,6 +1,6 @@
 {
   "name": "electron-app-v1",
-  "version": "1.0.6",
+  "version": "1.0.1",
   "description": "A minimal Electron application with JavaScript",
   "main": "./out/main/index.js",
   "author": "example.com",
@@ -40,11 +40,11 @@
       {
         "provider": "github",
         "owner": "easproxyz-boop",
-        "repo": "es_v1"
+        "repo": "es_v2"
       }
     ],
     "directories": {
-      "output": "release/macos"
+      "output": "release/windows"
     },
     "files": [
       "out/**/*",
@@ -67,13 +67,11 @@
       "deleteAppDataOnUninstall": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "Electron App Test3"
+      "shortcutName": "East Prime Whin"
     },
     "mac": {
       "target": ["dmg", "zip"],
-      "identity": "Developer ID Application: Your Name (TEAMID)",
-      "hardenedRuntime": true,
-      "gatekeeperAssess": false,
+      "identity": null,
       "category": "public.app-category.utilities"
     },
     "dmg": {
