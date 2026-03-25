@@ -71,10 +71,9 @@
       "shortcutName": "Electron App Test3"
     },
     "mac": {
-      "target": [
-        "dmg"
-      ],
-      "identity": null,
+      "target": ["dmg", "zip"],
+      "arch": ["x64", "arm64"],
+      "identity": "Developer ID Application: Erwin Aquino (0000)",
       "category": "public.app-category.utilities"
     },
     "dmg": {
