@@ -3,13 +3,13 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
-// ✅ AUTO UPDATE SETUP
+// ✅ Auto-update setup
 const { updateElectronApp } = require('update-electron-app')
 
 updateElectronApp({
   repo: 'easproxyz-boop/es_v1', // GitHub repo in "owner/repo" format
-  updateInterval: '5 minutes',   // ✅ Check every 5 minutes
-  notifyUser: true,
+  updateInterval: '5 minutes',   // Check every 5 minutes
+  notifyUser: true,               // Notify user if update is available
   logger: console                 // Logs update checks & errors
 })
 
@@ -19,7 +19,7 @@ function createWindow() {
     height: 670,
     show: false,
     autoHideMenuBar: true,
-    ...(process.platform === 'linux' ? { icon } : {}),
+    ...(process.platform === 'linux' ? { icon } : {}), // Linux icon
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
@@ -34,7 +34,7 @@ function createWindow() {
     return { action: 'deny' }
   })
 
-  // ✅ Load URL in dev or local file in production
+  // Load URL in dev or local file in production
   if (is.dev && process.env.ELECTRON_RENDERER_URL) {
     mainWindow.loadURL(process.env.ELECTRON_RENDERER_URL)
   } else {
@@ -43,7 +43,7 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-  // Set Windows App User Model ID
+  // Set Windows App User Model ID (for notifications & taskbar)
   electronApp.setAppUserModelId('com.electron.app')
 
   // Watch for dev shortcuts
@@ -51,7 +51,7 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
-  // Simple IPC example
+  // Example IPC
   ipcMain.on('ping', () => console.log('pong'))
 
   createWindow()

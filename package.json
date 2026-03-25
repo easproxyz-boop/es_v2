@@ -1,6 +1,6 @@
 {
   "name": "electron-app-v1",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A minimal Electron application with JavaScript",
   "main": "./out/main/index.js",
   "author": "example.com",
@@ -37,14 +37,6 @@
   "build": {
     "appId": "com.eastprimewhin.app",
     "productName": "East Prime Whin",
-    "publish": [
-      {
-        "provider": "github",
-        "owner": "easproxyz-boop",
-        "repo": "es_v1",
-        "releaseType": "release"
-      }
-    ],
     "directories": {
       "output": "release/macos"
     },
