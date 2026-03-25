@@ -3,15 +3,16 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
-// ✅ Auto-update setup
 const { updateElectronApp } = require('update-electron-app')
 
-updateElectronApp({
-  repo: 'easproxyz-boop/es_v1', // GitHub repo in "owner/repo" format
-  updateInterval: '5 minutes',   // Check every 5 minutes
-  notifyUser: true,               // Notify user if update is available
-  logger: console                 // Logs update checks & errors
-})
+if (app.isPackaged) {
+  updateElectronApp({
+    repo: 'easproxyz-boop/es_v1',
+    updateInterval: '5 minutes',
+    notifyUser: true,
+    logger: console
+  })
+}
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
