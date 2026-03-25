@@ -34,13 +34,15 @@
     "vite": "^7.2.6"
   },
   "build": {
-    "publish": {
-      "provider": "github",
-      "owner": "easproxyz-boop",
-      "repo": "es_v1"
-    },
     "appId": "com.eastprimewhin.app",
     "productName": "East Prime Whin",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "easproxyz-boop",
+        "repo": "es_v1"
+      }
+    ],
     "directories": {
       "output": "release/macos"
     },
@@ -53,10 +55,7 @@
       "target": [
         {
           "target": "nsis",
-          "arch": [
-            "x64",
-            "ia32"
-          ]
+          "arch": ["x64", "ia32"]
         }
       ]
     },
@@ -72,8 +71,9 @@
     },
     "mac": {
       "target": ["dmg", "zip"],
-      "arch": ["x64", "arm64"],
-      "identity": "Developer ID Application: Erwin Aquino (0000)",
+      "identity": "Developer ID Application: Your Name (TEAMID)",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
       "category": "public.app-category.utilities"
     },
     "dmg": {
@@ -81,16 +81,8 @@
       "icon": null,
       "iconSize": 80,
       "contents": [
-        {
-          "x": 130,
-          "y": 220
-        },
-        {
-          "x": 410,
-          "y": 220,
-          "type": "link",
-          "path": "/Applications"
-        }
+        { "x": 130, "y": 220 },
+        { "x": 410, "y": 220, "type": "link", "path": "/Applications" }
       ]
     }
   }
