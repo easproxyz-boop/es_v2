@@ -7,13 +7,11 @@ import icon from '../../resources/icon.png?asset'
 const { updateElectronApp } = require('update-electron-app')
 
 updateElectronApp({
-  repo: 'https://github.com/easproxyz-boop/es_v1.git', // 🔁 your repo
-  updateInterval: '2 seconds',
-  notifyUser: true
-});
-
-
-
+  repo: 'easproxyz-boop/es_v1', // GitHub repo in "owner/repo" format
+  updateInterval: '5 minutes',   // ✅ Check every 5 minutes
+  notifyUser: true,
+  logger: console                 // Logs update checks & errors
+})
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
@@ -28,33 +26,32 @@ function createWindow() {
     }
   })
 
-  mainWindow.on('ready-to-show', () => {
-    mainWindow.show()
-  })
+  mainWindow.once('ready-to-show', () => mainWindow.show())
 
+  // Open external links in default browser
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
     return { action: 'deny' }
   })
 
-
-  
-
-  // ✅ DEV vs PROD
-  if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
+  // ✅ Load URL in dev or local file in production
+  if (is.dev && process.env.ELECTRON_RENDERER_URL) {
+    mainWindow.loadURL(process.env.ELECTRON_RENDERER_URL)
   } else {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
 }
 
 app.whenReady().then(() => {
+  // Set Windows App User Model ID
   electronApp.setAppUserModelId('com.electron.app')
 
+  // Watch for dev shortcuts
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
   })
 
+  // Simple IPC example
   ipcMain.on('ping', () => console.log('pong'))
 
   createWindow()
@@ -64,8 +61,7 @@ app.whenReady().then(() => {
   })
 })
 
+// Quit app when all windows closed (except on macOS)
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+  if (process.platform !== 'darwin') app.quit()
 })
